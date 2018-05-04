@@ -15,6 +15,7 @@ struct PhysicsCategory {
     static let Projectile : UInt32 = 0b10
     
 }
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var topInit = 0
     override func didMove(to view: SKView)
@@ -22,6 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         while topInit < 11
         {
             addEnemyTop()
+            
         }
     }
 
@@ -29,17 +31,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return CGFloat(Float(arc4random())/0xFFFFFFFF)
     }
     func addEnemyTop() {
-        let f0 = SKTexture.init(imageNamed: "topEnemyPositionA.png")
-        let f1 = SKTexture.init(imageNamed: "topEnemyPositionB.png")
+        let f0 = SKTexture.init(imageNamed: "topEnemyPositionA")
+        let f1 = SKTexture.init(imageNamed: "topEnemyPositionB")
 
         let frames: [SKTexture] = [f0, f1]
         
         // Load the first frame as initialization
-        let enemy = SKSpriteNode(imageNamed: "topEnemyPositionA.png")
+        let enemy = SKSpriteNode(imageNamed: "topEnemyPositionA")
         
-        // Change the frame per 0.2 sec
-        let animation = SKAction.animate(with: frames, timePerFrame: 0.2)
-        enemy.run(SKAction.repeatForever(animation))
+       
         
         // Physics body (Probably Broken)
         enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
@@ -47,13 +47,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         enemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
         enemy.physicsBody?.collisionBitMask = PhysicsCategory.None
+        enemy.xScale = 1
+        enemy.yScale = 1
+        
         
         // Set position
-        enemy.position = CGPoint(x: (-384 - (topInit * 98)) , y: 180 )
+        enemy.position = CGPoint(x: (-384 + (topInit * 98)) , y: 180 )
         addChild(enemy)
+        
 
         topInit += 1
+     
         }
+    
+    
 
     }
 
