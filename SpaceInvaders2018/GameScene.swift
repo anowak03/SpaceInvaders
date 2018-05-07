@@ -52,7 +52,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         // Set position
-        enemy.position = CGPoint(x: (-384 + (topInit * 98)) , y: 180 )
+        enemy.position = CGPoint(x: (-394 + (topInit * 98)) , y: 180 )
         addChild(enemy)
         
 
