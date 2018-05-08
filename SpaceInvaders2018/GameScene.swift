@@ -18,6 +18,18 @@ struct PhysicsCategory {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var topInit = 0
+    let player = SKSpriteNode(imageNamed: "player")
+    var button: SKNode! = nil
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        print("onscreen")
+        player.position.x += 10
+        if button.contains(touch.location(in: self)) {
+            print("touched")
+            player.position.x += 10
+        }
+    }
+    
     override func didMove(to view: SKView)
     {
         while topInit < 11
@@ -25,11 +37,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addEnemyTop()
             
         }
+      
+            button = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
+            button.position = CGPoint(x: 435, y: -335);
+            button.isUserInteractionEnabled = true
+        
+        
+            self.addChild(button)
+        
     }
 
     func random() -> CGFloat {
         return CGFloat(Float(arc4random())/0xFFFFFFFF)
     }
+    
     func addEnemyTop() {
         let f0 = SKTexture.init(imageNamed: "topEnemyPositionA")
         let f1 = SKTexture.init(imageNamed: "topEnemyPositionB")
