@@ -32,7 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView)
     {
-        while topInit < 11
+        while topInit < 10
         {
             addEnemyTop()
             
@@ -60,7 +60,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Load the first frame as initialization
         let enemy = SKSpriteNode(imageNamed: "topEnemyPositionA")
         
-       
+        //Animate
+        let animation = SKAction.animate(with: frames, timePerFrame: 0.4)
+        enemy.run(SKAction.repeatForever(animation))
         
         // Physics body (Probably Broken)
         enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
