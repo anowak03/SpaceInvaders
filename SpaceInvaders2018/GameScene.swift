@@ -17,10 +17,10 @@ struct PhysicsCategory {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    var topInit = 0
+    var topInit : Double = 0.0
     override func didMove(to view: SKView)
     {
-        while topInit < 11
+        while topInit < 10
         {
             addEnemyTop()
             
@@ -39,7 +39,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Load the first frame as initialization
         let enemy = SKSpriteNode(imageNamed: "topEnemyPositionA")
         
-       
+        //Animate
+        let animation = SKAction.animate(with: frames, timePerFrame: 0.4)
+        enemy.run(SKAction.repeatForever(animation))
         
         // Physics body (Probably Broken)
         enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
@@ -52,7 +54,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         // Set position
-        enemy.position = CGPoint(x: (-384 + (topInit * 98)) , y: 180 )
+        enemy.position = CGPoint(x: (-448 + (topInit * 89.6)) , y: 180 )
         addChild(enemy)
         
 
