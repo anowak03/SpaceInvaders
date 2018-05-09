@@ -21,12 +21,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // create player as generic spriteNode variable
     var player = SKSpriteNode()
-    var button = SKSpriteNode()
+    var rightButton = SKSpriteNode()
+    var leftButton = SKSpriteNode()
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        player.position.x += 10
+      //  player.position.x += 10
         
 // other way to move player
 //        let actionMove = SKAction.moveTo(x: player.position.x + 10, duration: 0.2)
@@ -68,16 +69,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
-            button = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
+            rightButton = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
         
         // give the button a name so that you can identify if it was touched
-            button.name = "myButton"
-            button.position = CGPoint(x: 435, y: -335)
+            rightButton.name = "myButton"
+            rightButton.position = CGPoint(x: 435, y: -335)
         
         // do not want user interaction enabled for this method of determining touch point
-            button.isUserInteractionEnabled = false
+            rightButton.isUserInteractionEnabled = false
 
-            self.addChild(button)
+            self.addChild(rightButton)
         
     }
 
