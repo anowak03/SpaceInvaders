@@ -18,31 +18,65 @@ struct PhysicsCategory {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var topInit = 0
-    let player = SKSpriteNode(imageNamed: "player")
-    var button: SKNode! = nil
+    
+    // create player as generic spriteNode variable
+    var player = SKSpriteNode()
+    var button = SKSpriteNode()
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first!
-        print("onscreen")
+        
         player.position.x += 10
-        if button.contains(touch.location(in: self)) {
-            print("touched")
-            player.position.x += 10
+        
+// other way to move player
+//        let actionMove = SKAction.moveTo(x: player.position.x + 10, duration: 0.2)
+//        player.run(actionMove)
+
+        let touch:UITouch = touches.first!
+        let positionInScene = touch.location(in: self)
+        let touchedNode = self.atPoint(positionInScene)
+        
+        if let name = touchedNode.name
+        {
+            if name == "myButton"
+            {
+                print("Touched at \(touch.location(in: self))")
+                player.position.x += 10
+//                player.run(actionMove)
+
+            }
         }
+
+        print("onscreen")
+//        if button.contains(touch.location(in: self)) {
+//            print("touched at \(touch.location(in: self))")
+//            player.position.x += 10
+//        }
     }
     
     override func didMove(to view: SKView)
     {
+    // add the physicsWorld contact delegate
+        physicsWorld.contactDelegate = self
+        
+    // here is where we tie the code "player" variable with the player sprite in the gameScene.sks file (be sure to name the spriteNode in the gameScene.sks)
+        player = self.childNode(withName: "player") as! SKSpriteNode
+
         while topInit < 10
         {
             addEnemyTop()
             
         }
-      
+        
             button = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
-            button.position = CGPoint(x: 435, y: -335);
-            button.isUserInteractionEnabled = true
         
+        // give the button a name so that you can identify if it was touched
+            button.name = "myButton"
+            button.position = CGPoint(x: 435, y: -335)
         
+        // do not want user interaction enabled for this method of determining touch point
+            button.isUserInteractionEnabled = false
+
             self.addChild(button)
         
     }
@@ -86,4 +120,3 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
 
     }
-
