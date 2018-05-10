@@ -26,41 +26,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-      //  player.position.x += 10
-        
-// other way to move player
-//        let actionMove = SKAction.moveTo(x: player.position.x + 10, duration: 0.2)
-//        player.run(actionMove)
 
         let touch:UITouch = touches.first!
         let positionInScene = touch.location(in: self)
         let touchedNode = self.atPoint(positionInScene)
         
-        if let name = touchedNode.name
+        if var name = touchedNode.name
         {
-            if name == "myButton"
+            if name == "RButton"
             {
                 print("Touched at \(touch.location(in: self))")
-                player.position.x += 10
-//                player.run(actionMove)
+                player.position.x += 16
 
+
+            } else if name == "LButton" {
+                print("Touched at \(touch.location(in: self))")
+                player.position.x -= 16
             }
         }
-
+        
         print("onscreen")
-//        if button.contains(touch.location(in: self)) {
-//            print("touched at \(touch.location(in: self))")
-//            player.position.x += 10
-//        }
     }
     
     override func didMove(to view: SKView)
     {
-    // add the physicsWorld contact delegate
+   
         physicsWorld.contactDelegate = self
-        
-    // here is where we tie the code "player" variable with the player sprite in the gameScene.sks file (be sure to name the spriteNode in the gameScene.sks)
+    
         player = self.childNode(withName: "player") as! SKSpriteNode
 
         while topInit < 10
@@ -71,15 +63,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
             rightButton = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
         
-        // give the button a name so that you can identify if it was touched
-            rightButton.name = "myButton"
+        
+            rightButton.name = "RButton"
             rightButton.position = CGPoint(x: 435, y: -335)
         
-        // do not want user interaction enabled for this method of determining touch point
+       
             rightButton.isUserInteractionEnabled = false
 
             self.addChild(rightButton)
         
+            leftButton = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
+        
+        
+            leftButton.name = "LButton"
+            leftButton.position = CGPoint(x: -435, y: -335)
+        
+        
+            leftButton.isUserInteractionEnabled = false
+        
+            self.addChild(leftButton)
     }
 
     func random() -> CGFloat {
