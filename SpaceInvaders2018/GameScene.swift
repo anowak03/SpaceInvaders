@@ -18,35 +18,50 @@ struct PhysicsCategory {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var topInit = 0
+    var tryTouch = 0
     
     // create player as generic spriteNode variable
     var player = SKSpriteNode()
+    
+    //Init buttons
     var rightButton = SKSpriteNode()
     var leftButton = SKSpriteNode()
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        tryTouch = 1
+        
         let touch:UITouch = touches.first!
         let positionInScene = touch.location(in: self)
         let touchedNode = self.atPoint(positionInScene)
+        
         
         if var name = touchedNode.name
         {
             if name == "RButton"
             {
+                while tryTouch == 1
+                {
                 print("Touched at \(touch.location(in: self))")
                 player.position.x += 16
-
+                }
 
             } else if name == "LButton" {
+                while tryTouch == 1
+                {
                 print("Touched at \(touch.location(in: self))")
                 player.position.x -= 16
+                }
             }
         }
         
+        
+        
         print("onscreen")
     }
+    
+    
+    
     
     override func didMove(to view: SKView)
     {
@@ -61,6 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         }
         
+    
             rightButton = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
         
         
