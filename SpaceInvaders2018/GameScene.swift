@@ -17,19 +17,16 @@ struct PhysicsCategory {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-   
+    
     let playerFiredBulletName = "straightBullet!"
     let enemyFiredBulletName = "squigglyBullet"
     let kBulletSize = CGSize(width:4, height: 8)
     var topInit = 0
-    var tryTouch = 0
     
     // create player as generic spriteNode variable
- 
+    
     var tapQueue = [Int]()
     var player = SKSpriteNode()
-    
-    //Init buttons
     var rightButton = SKSpriteNode()
     var leftButton = SKSpriteNode()
     var shootButtonA = SKSpriteNode()
@@ -37,7 +34,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        tryTouch = 1
         
         let touch:UITouch = touches.first!
         let positionInScene = touch.location(in: self)
@@ -51,27 +47,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             if name == "RButton"
             {
-                while tryTouch == 1
-                {
                 print("Touched at \(touch.location(in: self))")
                 player.position.x += 16
-                }
-
+                
+                
             } else if name == "LButton" {
-                while tryTouch == 1
-                {
                 print("Touched at \(touch.location(in: self))")
                 player.position.x -= 16
             } else if name == "SBA" {
                 print("Shot fired!")
                 projectile = SKSpriteNode (imageNamed: "straightBullet")
                 let bulletAnimation = SKAction.animate(with: bulletFrames, timePerFrame: 0.15)
-              straightBullet.run(SKAction.repeatForever(bulletAnimation))
+                straightBullet.run(SKAction.repeatForever(bulletAnimation))
             } else if name == "SBB" {
                 print ("Shot fired!")
                 projectile = SKSpriteNode (imageNamed: "straightBullet")
                 let bulletAnimation = SKAction.animate(with: bulletFrames, timePerFrame: 0.15)
-               straightBullet.run(SKAction.repeatForever(bulletAnimation))
+                straightBullet.run(SKAction.repeatForever(bulletAnimation))
             }
             
             
@@ -95,8 +87,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let actionMoveDone = SKAction.removeFromParent()
         projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
         
-        
-        
         print("onscreen")
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -107,57 +97,54 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
-    
-    
-    
     override func didMove(to view: SKView)
     {
-   
+        
         physicsWorld.contactDelegate = self
-    
+        
         player = self.childNode(withName: "player") as! SKSpriteNode
-
+        
         while topInit < 10
         {
             addEnemyTop()
             
         }
-            shootButtonA = SKSpriteNode(color: SKColor.clear, size: CGSize(width: 150, height: 100))
-            shootButtonA.name = "SBA"
-            shootButtonA.position = CGPoint(x: -435, y: -235)
-            shootButtonB = SKSpriteNode(color: SKColor.clear, size: CGSize(width: 150, height: 100))
-            shootButtonB.name = "SBB"
-            shootButtonB.position = CGPoint(x: 435, y: -235)
-            rightButton = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
+        shootButtonA = SKSpriteNode(color: SKColor.clear, size: CGSize(width: 150, height: 100))
+        shootButtonA.name = "SBA"
+        shootButtonA.position = CGPoint(x: -435, y: -235)
+        shootButtonB = SKSpriteNode(color: SKColor.clear, size: CGSize(width: 150, height: 100))
+        shootButtonB.name = "SBB"
+        shootButtonB.position = CGPoint(x: 435, y: -235)
+        rightButton = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
         
         
-            rightButton.name = "RButton"
-            rightButton.position = CGPoint(x: 435, y: -335)
-        
-       
-            rightButton.isUserInteractionEnabled = false
-
-            self.addChild(rightButton)
-        
-            leftButton = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
+        rightButton.name = "RButton"
+        rightButton.position = CGPoint(x: 435, y: -335)
         
         
-            leftButton.name = "LButton"
-            leftButton.position = CGPoint(x: -435, y: -335)
+        rightButton.isUserInteractionEnabled = false
+        
+        self.addChild(rightButton)
+        
+        leftButton = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
         
         
-            leftButton.isUserInteractionEnabled = false
+        leftButton.name = "LButton"
+        leftButton.position = CGPoint(x: -435, y: -335)
+        
+        
+        leftButton.isUserInteractionEnabled = false
         
         
         
-            self.addChild(leftButton)
+        self.addChild(leftButton)
     }
     func projectileDidCollideWithMonster(projectile: SKSpriteNode, monster: SKSpriteNode) {
         print("Hit")
         projectile.removeFromParent()
         monster.removeFromParent()
     }
-
+    
     func random() -> CGFloat {
         return CGFloat(Float(arc4random())/0xFFFFFFFF)
     }
@@ -165,7 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addEnemyTop() {
         let f0 = SKTexture.init(imageNamed: "topEnemyPositionA")
         let f1 = SKTexture.init(imageNamed: "topEnemyPositionB")
-
+        
         let frames: [SKTexture] = [f0, f1]
         
         // Load the first frame as initialization
@@ -189,13 +176,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemy.position = CGPoint(x: (-394 + (topInit * 98)) , y: 180 )
         addChild(enemy)
         
-
+        
         topInit += 1
+        
+    }
+    
+    
+    
+    
+    
+}
      
-        }
+
  
     
     
     
 
-    }
+
