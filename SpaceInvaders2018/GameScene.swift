@@ -22,11 +22,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let enemyFiredBulletName = "squigglyBullet"
     let kBulletSize = CGSize(width:4, height: 8)
     var topInit = 0
+    var tryTouch = 0
     
     // create player as generic spriteNode variable
  
     var tapQueue = [Int]()
     var player = SKSpriteNode()
+    
+    //Init buttons
     var rightButton = SKSpriteNode()
     var leftButton = SKSpriteNode()
     var shootButtonA = SKSpriteNode()
@@ -34,7 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        tryTouch = 1
+        
         let touch:UITouch = touches.first!
         let positionInScene = touch.location(in: self)
         let touchedNode = self.atPoint(positionInScene)
@@ -47,11 +51,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             if name == "RButton"
             {
+                while tryTouch == 1
+                {
                 print("Touched at \(touch.location(in: self))")
                 player.position.x += 16
-
+                }
 
             } else if name == "LButton" {
+                while tryTouch == 1
+                {
                 print("Touched at \(touch.location(in: self))")
                 player.position.x -= 16
             } else if name == "SBA" {
@@ -87,6 +95,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let actionMoveDone = SKAction.removeFromParent()
         projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
         
+        
+        
         print("onscreen")
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -96,6 +106,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
+    
+    
     
     override func didMove(to view: SKView)
     {
