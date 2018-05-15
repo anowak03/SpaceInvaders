@@ -16,6 +16,7 @@
 		97EF4839208FBC5300B7A4BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97EF4837208FBC5300B7A4BC /* Main.storyboard */; };
 		97EF483B208FBC5300B7A4BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97EF483A208FBC5300B7A4BC /* Assets.xcassets */; };
 		97EF483E208FBC5300B7A4BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97EF483C208FBC5300B7A4BC /* LaunchScreen.storyboard */; };
+		E1609EB120A6278D0018E4BE /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1609EB020A6278D0018E4BE /* VectorMath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		97EF483A208FBC5300B7A4BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97EF483D208FBC5300B7A4BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97EF483F208FBC5300B7A4BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1609EB020A6278D0018E4BE /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VectorMath.swift; path = ../../../NinjaAssets/VectorMath.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				97EF4831208FBC5300B7A4BC /* Actions.sks */,
 				97EF4833208FBC5300B7A4BC /* GameScene.swift */,
 				97EF4835208FBC5300B7A4BC /* GameViewController.swift */,
+				E1609EB020A6278D0018E4BE /* VectorMath.swift */,
 				97EF4837208FBC5300B7A4BC /* Main.storyboard */,
 				97EF483A208FBC5300B7A4BC /* Assets.xcassets */,
 				97EF483C208FBC5300B7A4BC /* LaunchScreen.storyboard */,
@@ -160,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1609EB120A6278D0018E4BE /* VectorMath.swift in Sources */,
 				97EF4834208FBC5300B7A4BC /* GameScene.swift in Sources */,
 				97EF4836208FBC5300B7A4BC /* GameViewController.swift in Sources */,
 				97EF482E208FBC5300B7A4BC /* AppDelegate.swift in Sources */,
