@@ -33,41 +33,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var shootButtonB = SKSpriteNode()
     
     
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         let touch:UITouch = touches.first!
         let positionInScene = touch.location(in: self)
         let touchedNode = self.atPoint(positionInScene)
         var projectile = SKSpriteNode()
-        let a0 = SKTexture.init(imageNamed: "straightBullet")
-        let a1 = SKTexture.init(imageNamed: "straightBullet")
-        let straightBullet = SKSpriteNode(imageNamed: "straightBullet")
-        let bulletFrames : [SKTexture] = [a0, a1]
-        if let name = touchedNode.name
-        {
-            if name == "RButton"
-            {
-                print("Touched at \(touch.location(in: self))")
-                player.position.x += 16
-                
-                
-            } else if name == "LButton" {
-                print("Touched at \(touch.location(in: self))")
-                player.position.x -= 16
-            } else if name == "SBA" {
-                print("Shot fired!")
-                projectile = SKSpriteNode (imageNamed: "straightBullet")
-                let bulletAnimation = SKAction.animate(with: bulletFrames, timePerFrame: 0.15)
-                straightBullet.run(SKAction.repeatForever(bulletAnimation))
-            } else if name == "SBB" {
-                print ("Shot fired!")
-                projectile = SKSpriteNode (imageNamed: "straightBullet")
-                let bulletAnimation = SKAction.animate(with: bulletFrames, timePerFrame: 0.15)
-                straightBullet.run(SKAction.repeatForever(bulletAnimation))
-            }
-            
-            
-        }
         projectile.position = player.position
         projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/2)
         projectile.physicsBody?.isDynamic = true
@@ -75,18 +46,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         projectile.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
         projectile.physicsBody?.collisionBitMask = PhysicsCategory.None
         projectile.physicsBody?.usesPreciseCollisionDetection = true
-        let offset = positionInScene - projectile.position
-        if offset.x < 0 {
-            return
+        if let name = touchedNode.name
+        {
+            if name == "LButton" {
+                print("Touched at \(touch.location(in: self))")
+                player.position.x -= 16
+            }
+            
+            if name == "RButton"
+            {
+                print("Touched at \(touch.location(in: self))")
+                player.position.x += 16
+            }
+            if name == "SBA" || name == "SBB" {
+                print("Touched at \(touch.location(in: self))")
+                print("Shot fired!")
+                projectile = SKSpriteNode(imageNamed: "straightBullet")
+                addChild(projectile)
+                let actionMove = SKAction.moveTo(y: 384, duration: 4.0)
+                let actionMoveDone = SKAction.removeFromParent()
+                projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
+                
+            }
+            
+            
         }
-        
-        addChild(projectile)
-        let direction = offset.normalized()
-        let shootAmount = direction * 1000
-        let realDest = projectile.position
-        let actionMove = SKAction.move(to: realDest, duration: 2.0)
-        let actionMoveDone = SKAction.removeFromParent()
-        projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
         
         print("onscreen")
     }
@@ -100,12 +84,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView)
     {
-        let backgroundMusic = SKAudioNode(fileNamed: "03 Chibi Ninja")
-            backgroundMusic.autoplayLooped = true
-            addChild(backgroundMusic)
         
         physicsWorld.contactDelegate = self
-    
         
         player = self.childNode(withName: "player") as! SKSpriteNode
         
@@ -117,27 +97,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         shootButtonA = SKSpriteNode(color: SKColor.clear, size: CGSize(width: 150, height: 100))
         shootButtonA.name = "SBA"
         shootButtonA.position = CGPoint(x: -435, y: -235)
+        shootButtonA.isUserInteractionEnabled = false
+        
         shootButtonB = SKSpriteNode(color: SKColor.clear, size: CGSize(width: 150, height: 100))
         shootButtonB.name = "SBB"
         shootButtonB.position = CGPoint(x: 435, y: -235)
+        shootButtonB.isUserInteractionEnabled = false
+        
         rightButton = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
-        
-        
         rightButton.name = "RButton"
         rightButton.position = CGPoint(x: 435, y: -335)
-        
-        
         rightButton.isUserInteractionEnabled = false
-        
         self.addChild(rightButton)
         
         leftButton = SKSpriteNode(color: SKColor.green, size: CGSize(width: 150, height: 100))
-        
-        
         leftButton.name = "LButton"
         leftButton.position = CGPoint(x: -435, y: -335)
-        
-        
         leftButton.isUserInteractionEnabled = false
         
         
@@ -191,11 +166,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
 }
-     
 
- 
-    
-    
-    
+
+
+
+
+
 
 
