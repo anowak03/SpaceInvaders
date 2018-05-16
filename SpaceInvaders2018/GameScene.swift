@@ -83,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(projectile)
         let direction = offset.normalized()
         let shootAmount = direction * 1000
-        let realDest = shootAmount + projectile.position
+        let realDest = projectile.position
         let actionMove = SKAction.move(to: realDest, duration: 2.0)
         let actionMoveDone = SKAction.removeFromParent()
         projectile.run(SKAction.sequence([actionMove, actionMoveDone]))

@@ -81,11 +81,11 @@
 				97EF4831208FBC5300B7A4BC /* Actions.sks */,
 				97EF4833208FBC5300B7A4BC /* GameScene.swift */,
 				97EF4835208FBC5300B7A4BC /* GameViewController.swift */,
-				6E4D330120ACC0A300345236 /* 03 Chibi Ninja.mp3 */,
 				6E94297820AB752000DF86E7 /* VectorMath.swift */,
 				97EF4837208FBC5300B7A4BC /* Main.storyboard */,
 				97EF483A208FBC5300B7A4BC /* Assets.xcassets */,
 				97EF483C208FBC5300B7A4BC /* LaunchScreen.storyboard */,
+				6E4D330120ACC0A300345236 /* 03 Chibi Ninja.mp3 */,
 				97EF483F208FBC5300B7A4BC /* Info.plist */,
 			);
 			path = SpaceInvaders2018;
