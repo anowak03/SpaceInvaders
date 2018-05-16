@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E4D330220ACC0A300345236 /* 03 Chibi Ninja.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6E4D330120ACC0A300345236 /* 03 Chibi Ninja.mp3 */; };
+		6E94297920AB752000DF86E7 /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E94297820AB752000DF86E7 /* VectorMath.swift */; };
 		97D1FEF32098F71700F1C504 /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 97D1FEF22098F71700F1C504 /* PressStart2P.ttf */; };
 		97EF482E208FBC5300B7A4BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EF482D208FBC5300B7A4BC /* AppDelegate.swift */; };
 		97EF4830208FBC5300B7A4BC /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 97EF482F208FBC5300B7A4BC /* GameScene.sks */; };
@@ -16,10 +18,11 @@
 		97EF4839208FBC5300B7A4BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97EF4837208FBC5300B7A4BC /* Main.storyboard */; };
 		97EF483B208FBC5300B7A4BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97EF483A208FBC5300B7A4BC /* Assets.xcassets */; };
 		97EF483E208FBC5300B7A4BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97EF483C208FBC5300B7A4BC /* LaunchScreen.storyboard */; };
-		E1609EB120A6278D0018E4BE /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1609EB020A6278D0018E4BE /* VectorMath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E4D330120ACC0A300345236 /* 03 Chibi Ninja.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "03 Chibi Ninja.mp3"; sourceTree = "<group>"; };
+		6E94297820AB752000DF86E7 /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
 		97D1FEF22098F71700F1C504 /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart2P.ttf; sourceTree = "<group>"; };
 		97EF482A208FBC5300B7A4BC /* SpaceInvaders2018.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceInvaders2018.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97EF482D208FBC5300B7A4BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -31,7 +34,6 @@
 		97EF483A208FBC5300B7A4BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97EF483D208FBC5300B7A4BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97EF483F208FBC5300B7A4BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1609EB020A6278D0018E4BE /* VectorMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VectorMath.swift; path = ../../../NinjaAssets/VectorMath.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +81,8 @@
 				97EF4831208FBC5300B7A4BC /* Actions.sks */,
 				97EF4833208FBC5300B7A4BC /* GameScene.swift */,
 				97EF4835208FBC5300B7A4BC /* GameViewController.swift */,
-				E1609EB020A6278D0018E4BE /* VectorMath.swift */,
+				6E4D330120ACC0A300345236 /* 03 Chibi Ninja.mp3 */,
+				6E94297820AB752000DF86E7 /* VectorMath.swift */,
 				97EF4837208FBC5300B7A4BC /* Main.storyboard */,
 				97EF483A208FBC5300B7A4BC /* Assets.xcassets */,
 				97EF483C208FBC5300B7A4BC /* LaunchScreen.storyboard */,
@@ -150,6 +153,7 @@
 				97EF4839208FBC5300B7A4BC /* Main.storyboard in Resources */,
 				97EF4830208FBC5300B7A4BC /* GameScene.sks in Resources */,
 				97EF483B208FBC5300B7A4BC /* Assets.xcassets in Resources */,
+				6E4D330220ACC0A300345236 /* 03 Chibi Ninja.mp3 in Resources */,
 				97D1FEF32098F71700F1C504 /* PressStart2P.ttf in Resources */,
 				97EF483E208FBC5300B7A4BC /* LaunchScreen.storyboard in Resources */,
 				97EF4832208FBC5300B7A4BC /* Actions.sks in Resources */,
@@ -163,7 +167,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1609EB120A6278D0018E4BE /* VectorMath.swift in Sources */,
+				6E94297920AB752000DF86E7 /* VectorMath.swift in Sources */,
 				97EF4834208FBC5300B7A4BC /* GameScene.swift in Sources */,
 				97EF4836208FBC5300B7A4BC /* GameViewController.swift in Sources */,
 				97EF482E208FBC5300B7A4BC /* AppDelegate.swift in Sources */,

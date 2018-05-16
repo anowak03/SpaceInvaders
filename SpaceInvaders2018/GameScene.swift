@@ -79,6 +79,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if offset.x < 0 {
             return
         }
+        
         addChild(projectile)
         let direction = offset.normalized()
         let shootAmount = direction * 1000
@@ -99,8 +100,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView)
     {
+        let backgroundMusic = SKAudioNode(fileNamed: "03 Chibi Ninja")
+            backgroundMusic.autoplayLooped = true
+            addChild(backgroundMusic)
         
         physicsWorld.contactDelegate = self
+    
         
         player = self.childNode(withName: "player") as! SKSpriteNode
         
