@@ -18,10 +18,14 @@ struct PhysicsCategory {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    let playerFiredBulletName = "straightBullet!"
+    let playerFiredBulletName = "straightBullet"
     let enemyFiredBulletName = "squigglyBullet"
     let kBulletSize = CGSize(width:4, height: 8)
     var topInit = 0
+    var middleInit = 0
+    var middleInitB = 0
+    var bottomInit = 0
+    var bottomInitB = 0
     
     // create player as generic spriteNode variable
     
@@ -31,8 +35,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var leftButton = SKSpriteNode()
     var shootButtonA = SKSpriteNode()
     var shootButtonB = SKSpriteNode()
-    
-    
+    let f0 = SKTexture.init(imageNamed: "topEnemyPositionA")
+    let f1 = SKTexture.init(imageNamed: "topEnemyPositionB")
+    let f2 = SKTexture.init(imageNamed: "middleEnemyPositionA")
+    let f3 = SKTexture.init(imageNamed: "middleEnemyPositionB")
+    let f4 = SKTexture.init(imageNamed: "topEnemyPositionA")
+    let f5 = SKTexture.init(imageNamed: "topEnemyPositionB")
+    let topEnemy = SKSpriteNode(imageNamed: "topEnemyPositionA")
+    let middleEnemy = SKSpriteNode(imageNamed: "middleEnemyPositionA")
+    let bottomEnemy = SKSpriteNode(imageNamed: "bottomEnemyPositionA")
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch:UITouch = touches.first!
@@ -71,8 +82,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
                 
             }
-            
-            
+//            projectileDidCollideWithMonster(projectile: projectile, monster: topEnemy)
+//            projectileDidCollideWithMonster(projectile: projectile, monster: middleEnemy)
+//            projectileDidCollideWithMonster(projectile: projectile, monster: bottomEnemy)
         }
         
         print("onscreen")
@@ -87,7 +99,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView)
     {
-        
+        let backgroundMusic = SKAudioNode(fileNamed: "03 Chibi Ninja")
+        backgroundMusic.autoplayLooped = true
+        addChild(backgroundMusic)
         physicsWorld.contactDelegate = self
         
         player = self.childNode(withName: "player") as! SKSpriteNode
@@ -96,6 +110,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             addEnemyTop()
             
+        }
+        while middleInit < 10
+        {
+            addEnemyMiddle()
+        }
+        while middleInitB < 10
+        {
+            addEnemyMiddleB()
+        }
+        while bottomInit < 10
+        {
+            addEnemyBottom()
+        }
+        while bottomInitB < 10
+        {
+            addEnemyBottomB()
         }
         shootButtonA = SKSpriteNode(color: SKColor.clear, size: CGSize(width: 150, height: 100))
         shootButtonA.name = "SBA"
@@ -124,42 +154,179 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func projectileDidCollideWithMonster(projectile: SKSpriteNode, monster: SKSpriteNode) {
         print("Hit")
         projectile.removeFromParent()
-        monster.removeFromParent()
+        topEnemy.removeFromParent()
+        middleEnemy.removeFromParent()
+        bottomEnemy.removeFromParent()
     }
-    
+    func didBegin(_ contact: SKPhysicsContact) {
+        print("In didBegin")
+        let firstBody = contact.bodyA
+        let secondBody = contact.bodyB
+        // If they can become SKSpriteNode's, call function “projectileDidCollideWithMonster”
+        // and pass them in so that they get removed from the game, showing as a "hit"
+        if let monster = firstBody.node as? SKSpriteNode, let
+            projectile = secondBody.node as? SKSpriteNode {
+            projectileDidCollideWithMonster(projectile: projectile, monster: monster)
+        }
+    }
     func random() -> CGFloat {
         return CGFloat(Float(arc4random())/0xFFFFFFFF)
     }
     
     func addEnemyTop() {
-        let f0 = SKTexture.init(imageNamed: "topEnemyPositionA")
-        let f1 = SKTexture.init(imageNamed: "topEnemyPositionB")
+
+
         
-        let frames: [SKTexture] = [f0, f1]
+        let topFrames: [SKTexture] = [f0, f1]
+
         
         // Load the first frame as initialization
-        let enemy = SKSpriteNode(imageNamed: "topEnemyPositionA")
+        let topEnemy = SKSpriteNode(imageNamed: "topEnemyPositionA")
+
         
         //Animate
-        let animation = SKAction.animate(with: frames, timePerFrame: 0.4)
-        enemy.run(SKAction.repeatForever(animation))
+        let topAnimation = SKAction.animate(with: topFrames, timePerFrame: 0.4)
+        topEnemy.run(SKAction.repeatForever(topAnimation))
         
         // Physics body (Probably Broken)
-        enemy.physicsBody = SKPhysicsBody(rectangleOf: enemy.size)
-        enemy.physicsBody?.isDynamic = true
-        enemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
-        enemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
-        enemy.physicsBody?.collisionBitMask = PhysicsCategory.None
-        enemy.xScale = 1
-        enemy.yScale = 1
+        topEnemy.physicsBody = SKPhysicsBody(rectangleOf: topEnemy.size)
+        topEnemy.physicsBody?.isDynamic = true
+        topEnemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
+        topEnemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
+        topEnemy.physicsBody?.collisionBitMask = PhysicsCategory.None
+        topEnemy.xScale = 1
+        topEnemy.yScale = 1
         
         
         // Set position
-        enemy.position = CGPoint(x: (-394 + (topInit * 98)) , y: 180 )
-        addChild(enemy)
+        topEnemy.position = CGPoint(x: (-420 + (topInit * 98)) , y: 240)
+        addChild(topEnemy)
         
         
         topInit += 1
+        
+    }
+    func addEnemyMiddle() {
+
+        
+        let middleFrames: [SKTexture] = [f2, f3]
+        
+        // Load the first frame as initialization
+        let middleEnemy = SKSpriteNode(imageNamed: "middleEnemyPositionA")
+        
+        //Animate
+        let middleAnimation = SKAction.animate(with: middleFrames, timePerFrame: 0.4)
+        middleEnemy.run(SKAction.repeatForever(middleAnimation))
+
+        
+        // Physics body (Probably Broken)
+        middleEnemy.physicsBody = SKPhysicsBody(rectangleOf: middleEnemy.size)
+        middleEnemy.physicsBody?.isDynamic = true
+        middleEnemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
+        middleEnemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
+        middleEnemy.physicsBody?.collisionBitMask = PhysicsCategory.None
+        middleEnemy.xScale = 1
+        middleEnemy.yScale = 1
+        
+        
+        // Set position
+        middleEnemy.position = CGPoint(x: (-420 + (middleInit * 98)) , y: 160)
+        addChild(middleEnemy)
+        
+        
+        middleInit += 1
+        
+    }
+    func addEnemyMiddleB() {
+
+        let middleFrames: [SKTexture] = [f2, f3]
+        
+        // Load the first frame as initialization
+        let middleEnemy = SKSpriteNode(imageNamed: "middleEnemyPositionA")
+        
+        //Animate
+        let middleAnimation = SKAction.animate(with: middleFrames, timePerFrame: 0.4)
+        middleEnemy.run(SKAction.repeatForever(middleAnimation))
+        
+        
+        // Physics body (Probably Broken)
+        middleEnemy.physicsBody = SKPhysicsBody(rectangleOf: middleEnemy.size)
+        middleEnemy.physicsBody?.isDynamic = true
+        middleEnemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
+        middleEnemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
+        middleEnemy.physicsBody?.collisionBitMask = PhysicsCategory.None
+        middleEnemy.xScale = 1
+        middleEnemy.yScale = 1
+        
+        
+        // Set position
+        middleEnemy.position = CGPoint(x: (-420 + (middleInitB * 98)) , y: 80)
+        addChild(middleEnemy)
+        
+        
+        middleInitB += 1
+        
+    }
+    func addEnemyBottom() {
+
+        
+        let bottomFrames: [SKTexture] = [f4, f5]
+        
+        // Load the first frame as initialization
+        let bottomEnemy = SKSpriteNode(imageNamed: "bottomEnemyPositionA")
+        
+        //Animate
+        let bottomAnimation = SKAction.animate(with: bottomFrames, timePerFrame: 0.4)
+        bottomEnemy.run(SKAction.repeatForever(bottomAnimation))
+        
+        
+        // Physics body (Probably Broken)
+        bottomEnemy.physicsBody = SKPhysicsBody(rectangleOf: bottomEnemy.size)
+        bottomEnemy.physicsBody?.isDynamic = true
+        bottomEnemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
+        bottomEnemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
+        bottomEnemy.physicsBody?.collisionBitMask = PhysicsCategory.None
+        bottomEnemy.xScale = 1
+        bottomEnemy.yScale = 1
+        
+        
+        // Set position
+        bottomEnemy.position = CGPoint(x: (-420 + (bottomInit * 98)) , y: 0)
+        addChild(bottomEnemy)
+        
+        
+        bottomInit += 1
+        
+    }
+    func addEnemyBottomB() {
+
+        
+        let bottomFrames: [SKTexture] = [f4, f5]
+        
+        // Load the first frame as initialization
+        let bottomEnemy = SKSpriteNode(imageNamed: "bottomEnemyPositionA")
+        
+        //Animate
+        let bottomAnimation = SKAction.animate(with: bottomFrames, timePerFrame: 0.4)
+        bottomEnemy.run(SKAction.repeatForever(bottomAnimation))
+        
+        
+        // Physics body (Probably Broken)
+        bottomEnemy.physicsBody = SKPhysicsBody(rectangleOf: bottomEnemy.size)
+        bottomEnemy.physicsBody?.isDynamic = true
+        bottomEnemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
+        bottomEnemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
+        bottomEnemy.physicsBody?.collisionBitMask = PhysicsCategory.None
+        bottomEnemy.xScale = 1
+        bottomEnemy.yScale = 1
+        
+        
+        // Set position
+        bottomEnemy.position = CGPoint(x: (-420 + (bottomInitB * 98)) , y: -80)
+        addChild(bottomEnemy)
+        
+        
+        bottomInitB += 1
         
     }
     
