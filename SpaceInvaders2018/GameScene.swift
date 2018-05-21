@@ -82,9 +82,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
                 
             }
-//            projectileDidCollideWithMonster(projectile: projectile, monster: topEnemy)
-//            projectileDidCollideWithMonster(projectile: projectile, monster: middleEnemy)
-//            projectileDidCollideWithMonster(projectile: projectile, monster: bottomEnemy)
+
         }
         
         print("onscreen")
@@ -151,24 +149,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         leftButton.isUserInteractionEnabled = false
         self.addChild(leftButton)
     }
-    func projectileDidCollideWithMonster(projectile: SKSpriteNode, monster: SKSpriteNode) {
+    func projectileDidCollideWithEnemy(projectile: SKSpriteNode, enemy: SKSpriteNode) {
         print("Hit")
         projectile.removeFromParent()
         topEnemy.removeFromParent()
         middleEnemy.removeFromParent()
         bottomEnemy.removeFromParent()
     }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         print("In didBegin")
         let firstBody = contact.bodyA
         let secondBody = contact.bodyB
-        // If they can become SKSpriteNode's, call function “projectileDidCollideWithMonster”
-        // and pass them in so that they get removed from the game, showing as a "hit"
-        if let monster = firstBody.node as? SKSpriteNode, let
+        
+        if let enemy = firstBody.node as? SKSpriteNode, let
             projectile = secondBody.node as? SKSpriteNode {
-            projectileDidCollideWithMonster(projectile: projectile, monster: monster)
+            projectileDidCollideWithEnemy(projectile: projectile, enemy: topEnemy)
+            projectileDidCollideWithEnemy(projectile: projectile, enemy: middleEnemy)
+            projectileDidCollideWithEnemy(projectile: projectile, enemy: bottomEnemy)
         }
     }
+    
     func random() -> CGFloat {
         return CGFloat(Float(arc4random())/0xFFFFFFFF)
     }
@@ -196,7 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         topEnemy.physicsBody?.collisionBitMask = PhysicsCategory.None
         topEnemy.xScale = 1
         topEnemy.yScale = 1
-        
+        topEnemy.physicsBody?.usesPreciseCollisionDetection = true
         
         // Set position
         topEnemy.position = CGPoint(x: (-420 + (topInit * 98)) , y: 240)
@@ -227,7 +228,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         middleEnemy.physicsBody?.collisionBitMask = PhysicsCategory.None
         middleEnemy.xScale = 1
         middleEnemy.yScale = 1
-        
+        middleEnemy.physicsBody?.usesPreciseCollisionDetection = true
         
         // Set position
         middleEnemy.position = CGPoint(x: (-420 + (middleInit * 98)) , y: 160)
@@ -257,7 +258,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         middleEnemy.physicsBody?.collisionBitMask = PhysicsCategory.None
         middleEnemy.xScale = 1
         middleEnemy.yScale = 1
-        
+        middleEnemy.physicsBody?.usesPreciseCollisionDetection = true
         
         // Set position
         middleEnemy.position = CGPoint(x: (-420 + (middleInitB * 98)) , y: 80)
@@ -288,7 +289,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bottomEnemy.physicsBody?.collisionBitMask = PhysicsCategory.None
         bottomEnemy.xScale = 1
         bottomEnemy.yScale = 1
-        
+        bottomEnemy.physicsBody?.usesPreciseCollisionDetection = true
         
         // Set position
         bottomEnemy.position = CGPoint(x: (-420 + (bottomInit * 98)) , y: 0)
@@ -319,7 +320,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bottomEnemy.physicsBody?.collisionBitMask = PhysicsCategory.None
         bottomEnemy.xScale = 1
         bottomEnemy.yScale = 1
-        
+        bottomEnemy.physicsBody?.usesPreciseCollisionDetection = true
         
         // Set position
         bottomEnemy.position = CGPoint(x: (-420 + (bottomInitB * 98)) , y: -80)
