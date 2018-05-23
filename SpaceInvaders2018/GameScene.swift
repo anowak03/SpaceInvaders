@@ -52,12 +52,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let positionInScene = touch.location(in: self)
         let touchedNode = self.atPoint(positionInScene)
         var projectile = SKSpriteNode()
-//        projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/2)
-//        projectile.physicsBody?.isDynamic = true
-//        projectile.physicsBody?.categoryBitMask = PhysicsCategory.Projectile
-//        projectile.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
-//        projectile.physicsBody?.collisionBitMask = PhysicsCategory.None
-//        projectile.physicsBody?.usesPreciseCollisionDetection = true
         if let name = touchedNode.name
         {
             if name == "LButton" {
@@ -78,7 +72,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 projectile = SKSpriteNode(imageNamed: "straightBullet")
                 projectile.position = player.position
                 print(projectile.position)
-                projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/2)
+                projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/9)
                 projectile.physicsBody?.isDynamic = true
                 projectile.physicsBody?.categoryBitMask = PhysicsCategory.Projectile
                 projectile.physicsBody?.contactTestBitMask = PhysicsCategory.Enemy
@@ -91,9 +85,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 projectile.run(SKAction.sequence([actionMove, actionMoveDone]))
                 
             }
-            //            projectileDidCollideWithMonster(projectile: projectile, monster: topEnemy)
-            //            projectileDidCollideWithMonster(projectile: projectile, monster: middleEnemy)
-            //            projectileDidCollideWithMonster(projectile: projectile, monster: bottomEnemy)
+
         }
         
         print("onscreen")
@@ -160,25 +152,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         leftButton.isUserInteractionEnabled = false
         self.addChild(leftButton)
     }
-    func projectileDidCollideWithMonster(projectile: SKSpriteNode, monster: SKSpriteNode) {
+    func projectileDidCollideWithEnemy(projectile: SKSpriteNode, enemy: SKSpriteNode) {
         print("Hit")
-        monster.removeFromParent()
+        enemy.removeFromParent()
         projectile.removeFromParent()
-//        topEnemy.removeFromParent()
-//        middleEnemy.removeFromParent()
-//        bottomEnemy.removeFromParent()
+
     }
     func didBegin(_ contact: SKPhysicsContact) {
         print("In didBegin \n contact bodyA: \(contact.bodyA), contact bodyB: \(contact.bodyB)")
         
         let firstBody = contact.bodyA
         let secondBody = contact.bodyB
-        // If they can become SKSpriteNode's, call function “projectileDidCollideWithMonster”
-        // and pass them in so that they get removed from the game, showing as a "hit"
-        if let monster = firstBody.node as? SKSpriteNode, let
+        if let enemy = firstBody.node as? SKSpriteNode, let
             projectile = secondBody.node as? SKSpriteNode {
-            print("In monster - projectile if-let statement")
-            projectileDidCollideWithMonster(projectile: projectile, monster: monster)
+            print("In enemy - projectile if-let statement")
+            projectileDidCollideWithEnemy(projectile: projectile, enemy: enemy)
         }
     }
     func random() -> CGFloat {
@@ -201,7 +189,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         topEnemy.run(SKAction.repeatForever(topAnimation))
         
         // Physics body (Probably Broken)
-        topEnemy.physicsBody = SKPhysicsBody(rectangleOf: topEnemy.size)
+        topEnemy.physicsBody = SKPhysicsBody(circleOfRadius: topEnemy.size.width/3.5)
         topEnemy.physicsBody?.isDynamic = true
         topEnemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         topEnemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
@@ -232,7 +220,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         // Physics body (Probably Broken)
-        middleEnemy.physicsBody = SKPhysicsBody(rectangleOf: middleEnemy.size)
+        middleEnemy.physicsBody = SKPhysicsBody(circleOfRadius: middleEnemy.size.width/3.5)
         middleEnemy.physicsBody?.isDynamic = true
         middleEnemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         middleEnemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
@@ -262,7 +250,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         // Physics body (Probably Broken)
-        middleEnemy.physicsBody = SKPhysicsBody(rectangleOf: middleEnemy.size)
+        middleEnemy.physicsBody = SKPhysicsBody(circleOfRadius: middleEnemy.size.width/3.5)
         middleEnemy.physicsBody?.isDynamic = true
         middleEnemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         middleEnemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
@@ -293,7 +281,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         // Physics body (Probably Broken)
-        bottomEnemy.physicsBody = SKPhysicsBody(rectangleOf: bottomEnemy.size)
+        bottomEnemy.physicsBody = SKPhysicsBody(circleOfRadius: bottomEnemy.size.width/3.5)
         bottomEnemy.physicsBody?.isDynamic = true
         bottomEnemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         bottomEnemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
@@ -324,7 +312,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         // Physics body (Probably Broken)
-        bottomEnemy.physicsBody = SKPhysicsBody(rectangleOf: bottomEnemy.size)
+        bottomEnemy.physicsBody = SKPhysicsBody(circleOfRadius: bottomEnemy.size.width/3.5)
         bottomEnemy.physicsBody?.isDynamic = true
         bottomEnemy.physicsBody?.categoryBitMask = PhysicsCategory.Enemy
         bottomEnemy.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
