@@ -19,7 +19,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let Projectile : UInt32 = 0b10
         
     }
-    
+    var currentScore : Int = 0
     let playerFiredBulletName = "straightBullet"
     let enemyFiredBulletName = "squigglyBullet"
     let kBulletSize = CGSize(width:4, height: 8)
@@ -28,6 +28,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var middleInitB = 0
     var bottomInit = 0
     var bottomInitB = 0
+    var currentScoreLabel = SKLabelNode()
+    
+    
     
     // create player as generic spriteNode variable
     
@@ -52,26 +55,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let positionInScene = touch.location(in: self)
         let touchedNode = self.atPoint(positionInScene)
         var projectile = SKSpriteNode()
+        
         if let name = touchedNode.name
         {
             if name == "LButton" {
-                print("Touched at \(touch.location(in: self))")
                 player.position.x -= 24
             }
             
             if name == "RButton"
             {
-                print("Touched at \(touch.location(in: self))")
                 player.position.x += 24
             }
             if name == "SBA" || name == "SBB" {
-                print("Touched at \(touch.location(in: self))")
                 print("Shot fired!")
                 projectile.position = player.position
-                print(player.position)
                 projectile = SKSpriteNode(imageNamed: "straightBullet")
                 projectile.position = player.position
-                print(projectile.position)
                 projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/9)
                 projectile.physicsBody?.isDynamic = true
                 projectile.physicsBody?.categoryBitMask = PhysicsCategory.Projectile
@@ -88,7 +87,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         }
         
-        print("onscreen")
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
@@ -104,7 +102,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundMusic.autoplayLooped = true
         addChild(backgroundMusic)
         physicsWorld.contactDelegate = self
-        
+        currentScoreLabel.text = "0"
+        currentScoreLabel.position = CGPoint(x: -183, y: 320)
+        currentScoreLabel.fontName = "PressStart2P"
+        currentScoreLabel.fontSize = 30
+        addChild(currentScoreLabel)
         player = self.childNode(withName: "player") as! SKSpriteNode
         
         while topInit < 10
@@ -156,18 +158,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         print("Hit")
         enemy.removeFromParent()
         projectile.removeFromParent()
-
+        if enemy.position.y > CGFloat(200.0) {
+            currentScore += 40
+            print(currentScore)
+            currentScoreLabel.text = String(currentScore)
+            print(currentScoreLabel.text)
+        } else
+        if enemy.position.y == CGFloat(160) || enemy.position.y == CGFloat(80) {
+            currentScore += 20
+            currentScoreLabel.text = String(currentScore)
+        } else
+        if enemy.position.y == CGFloat(0) || enemy.position.y == CGFloat(-80) {
+            currentScore += 10
+            currentScoreLabel.text = String(currentScore)
+        }
+   
     }
     func didBegin(_ contact: SKPhysicsContact) {
-        print("In didBegin \n contact bodyA: \(contact.bodyA), contact bodyB: \(contact.bodyB)")
         
         let firstBody = contact.bodyA
         let secondBody = contact.bodyB
         if let enemy = firstBody.node as? SKSpriteNode, let
             projectile = secondBody.node as? SKSpriteNode {
-            print("In enemy - projectile if-let statement")
             projectileDidCollideWithEnemy(projectile: projectile, enemy: enemy)
         }
+        print(currentScore)
     }
     func random() -> CGFloat {
         return CGFloat(Float(arc4random())/0xFFFFFFFF)
@@ -201,7 +216,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Set position
         topEnemy.position = CGPoint(x: (-420 + (topInit * 98)) , y: 240)
         addChild(topEnemy)
-        
+        print(topEnemy.position)
         
         topInit += 1
         
