@@ -200,7 +200,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         //Animate
-        let topAnimation = SKAction.animate(with: topFrames, timePerFrame: 0.4)
+        let topAnimation = SKAction.animate(with: topFrames, timePerFrame: 0.5)
         topEnemy.run(SKAction.repeatForever(topAnimation))
         
         // Physics body (Probably Broken)
@@ -230,7 +230,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let middleEnemy = SKSpriteNode(imageNamed: "middleEnemyPositionA")
         
         //Animate
-        let middleAnimation = SKAction.animate(with: middleFrames, timePerFrame: 0.4)
+        let middleAnimation = SKAction.animate(with: middleFrames, timePerFrame: 0.5)
         middleEnemy.run(SKAction.repeatForever(middleAnimation))
         
         
@@ -260,7 +260,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let middleEnemy = SKSpriteNode(imageNamed: "middleEnemyPositionA")
         
         //Animate
-        let middleAnimation = SKAction.animate(with: middleFrames, timePerFrame: 0.4)
+        let middleAnimation = SKAction.animate(with: middleFrames, timePerFrame: 0.5)
         middleEnemy.run(SKAction.repeatForever(middleAnimation))
         
         
@@ -291,7 +291,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let bottomEnemy = SKSpriteNode(imageNamed: "bottomEnemyPositionA")
         
         //Animate
-        let bottomAnimation = SKAction.animate(with: bottomFrames, timePerFrame: 0.4)
+        let bottomAnimation = SKAction.animate(with: bottomFrames, timePerFrame: 0.5)
         bottomEnemy.run(SKAction.repeatForever(bottomAnimation))
         
         
@@ -322,7 +322,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let bottomEnemy = SKSpriteNode(imageNamed: "bottomEnemyPositionA")
         
         //Animate
-        let bottomAnimation = SKAction.animate(with: bottomFrames, timePerFrame: 0.4)
+        let bottomAnimation = SKAction.animate(with: bottomFrames, timePerFrame: 0.5)
         bottomEnemy.run(SKAction.repeatForever(bottomAnimation))
         
         
